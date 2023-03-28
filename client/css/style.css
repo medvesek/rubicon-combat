@@ -1,0 +1,23 @@
+#game-area {
+  border: 1px solid black;
+  position: relative;
+}
+
+@keyframes destroy-animation {
+    0% {
+      transform: scale(1) rotate(0deg);
+    }
+    25% {
+      transform: scale(1.6) rotate(0deg);
+    }
+    100% {
+      transform: scale(0) rotate(360deg);
+    }
+  }
+
+  .play-destroy-animation {
+    animation-name: destroy-animation;
+    animation-duration: 1s;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: forwards;
+  }
