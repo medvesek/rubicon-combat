@@ -2,7 +2,7 @@ module.exports = {
   apps: [
     {
       name: "Rubicon Combat Server",
-      script: "./server/main.js",
+      script: "node server/main.js",
     },
   ],
 };
