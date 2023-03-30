@@ -1,6 +1,6 @@
 ## Requirements
 
-- Node.js
+- Node.js 16
 
 ## How to run
 
