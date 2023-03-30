@@ -37,7 +37,7 @@ app.use(express.static("dist"));
 
 // Start server
 server.listen(PORT, () => {
-  console.log("listening on *:3000");
+  console.log("listening on *:" + PORT);
 });
 
 ////////////////
