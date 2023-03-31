@@ -10,6 +10,7 @@ dotenv.config();
 import express from "express";
 import { Server } from "socket.io";
 import http from "http";
+import cors from "cors";
 
 // Game functions
 import createState from "./game/state.js";
@@ -28,9 +29,12 @@ const PORT = process.env.SERVER_PORT;
 //////////////////
 
 // Initialize server
+const validOrigins = ["localhost", "127.0.0.1"];
 const app = express();
 const server = http.createServer(app);
-const io = new Server(server, { cors: ["localhost", "127.0.0.1"] });
+const io = new Server(server, { cors: validOrigins });
+
+app.use(cors());
 
 // Serve static files from dist directory (for production environment)
 app.use(express.static("dist"));

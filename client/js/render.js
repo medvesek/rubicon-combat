@@ -1,13 +1,19 @@
 const gameArea = document.getElementById("game-area");
 const elements = {};
 
-export default function render(game) {
+export default function render(game, delay) {
+  showDelay(delay);
+
   updateGameArea(game);
 
   for (let object of game.objects) {
     updateOrCreateElement(object);
   }
   removeDeletedElements(game);
+}
+
+function showDelay(delay) {
+  document.getElementById("delay").innerHTML = delay + " ms";
 }
 
 function updateGameArea(game) {
