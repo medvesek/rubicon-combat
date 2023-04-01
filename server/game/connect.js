@@ -33,6 +33,6 @@ function createNewPlayer(state) {
     cooldown: 0,
     keys: {},
     mouse: {},
-    idleTimeoutTimer: 5,
+    idleTimeoutTimer: state.settings.idleTimeout,
   };
 }
