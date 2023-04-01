@@ -8,6 +8,7 @@ export default function emit(state) {
       color: player.color,
       height: player.size.height,
       width: player.size.width,
+      velocity: player.velocity,
     })),
     settings: {
       height: state.settings.maxY + 10,

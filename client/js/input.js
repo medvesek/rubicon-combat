@@ -1,6 +1,6 @@
 const gameArea = document.getElementById("game-area");
-const keys = {};
-const mouse = {
+export const keys = {};
+export const mouse = {
   leftMouseButton: false,
   x: 0,
   y: 0,
@@ -11,7 +11,7 @@ export default function sendInputToServer(socket) {
   window.requestAnimationFrame(() => inputLoop(socket));
 }
 
-function registerInputListeners() {
+export function registerInputListeners() {
   document.addEventListener("keydown", (e) => {
     keys[e.key] = true;
   });
