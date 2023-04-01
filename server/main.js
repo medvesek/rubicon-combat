@@ -10,7 +10,6 @@ dotenv.config();
 import express from "express";
 import { Server } from "socket.io";
 import http from "http";
-import cors from "cors";
 
 // Game functions
 import createState from "./game/state.js";
@@ -33,8 +32,6 @@ const validOrigins = ["localhost", "127.0.0.1"];
 const app = express();
 const server = http.createServer(app);
 const io = new Server(server, { cors: validOrigins });
-
-app.use(cors());
 
 // Serve static files from dist directory (for production environment)
 app.use(express.static("dist"));
@@ -64,6 +61,7 @@ io.on("connection", (socket) => {
 
 // Main game loop
 let prevTime = Date.now();
+
 setInterval(() => {
   let currentTime = Date.now();
   let dt = currentTime - prevTime;
