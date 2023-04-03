@@ -47,7 +47,7 @@ function handleIdleTimeout(object, dt, state) {
   }
 }
 
-function handleMovementInput(player, dt, state) {
+export function handleMovementInput(player, dt, state) {
   let maxVelocity = state.settings.maxVelocity;
   let acceleration = state.settings.acceleration * (dt / 16);
 
@@ -153,7 +153,7 @@ function collision(player, state) {
   }
 }
 
-function applyDrag(player, dt, state) {
+export function applyDrag(player, dt, state) {
   let drag = player.drag * (dt / 16);
   let speed = Math.sqrt(
     Math.pow(player.velocity.x, 2) + Math.pow(player.velocity.y, 2)
@@ -166,7 +166,7 @@ function applyDrag(player, dt, state) {
   }
 }
 
-function changePosition(object, dt, state) {
+export function changePosition(object, dt, state) {
   let minX = state.settings.minX;
   let minY = state.settings.minY;
   let maxX = state.settings.maxX;

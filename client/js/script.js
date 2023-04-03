@@ -1,6 +1,5 @@
 import { io } from "socket.io-client";
 import render from "./render";
-import sendInputToServer from "./input";
 import { registerInputListeners, keys, mouse } from "./input";
 import { createShowDelayFunction } from "./utlities";
 import update from "./update";
@@ -10,11 +9,11 @@ const socket = io(WEBSOCKETS_URL);
 let serverState = null;
 let currentState = null;
 
-const showDelayFunction = createShowDelayFunction();
+const showDelay = createShowDelayFunction();
 
-socket.on("update", (game) => {
-  showDelayFunction();
-  serverState = game;
+socket.on("update", (state) => {
+  showDelay();
+  serverState = state;
 });
 
 registerInputListeners();
@@ -35,8 +34,8 @@ function gameLoop(socket) {
 
   socket.emit("input", { keys, mouse });
 
-  window.requestAnimationFrame(() => gameLoop(socket));
   prevTime = currentTime;
+  window.requestAnimationFrame(() => gameLoop(socket));
 }
 
 gameLoop(socket);
