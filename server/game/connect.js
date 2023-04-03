@@ -4,12 +4,14 @@ import randomInt from "../lib/random/randomInt.js";
 // This function runs every time
 // a new player connects to the server
 
-export default function onConnect(state) {
-  let player = createNewPlayer(state);
+export default function onConnect(state, socket) {
+  if (!socket.request.headers["rubicon-debug"]) {
+    let player = createNewPlayer(state);
 
-  state.objects[player.id] = player;
+    state.objects[player.id] = player;
 
-  return player;
+    return player;
+  }
 }
 
 function createNewPlayer(state) {

@@ -50,7 +50,7 @@ const state = createState();
 
 // Handle websocket connections
 io.on("connection", (socket) => {
-  let connection = onConnect(state);
+  let connection = onConnect(state, socket);
   socket.on("disconnect", () => {
     onDisconnect(connection, state);
   });
