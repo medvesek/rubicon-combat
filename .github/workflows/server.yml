@@ -25,7 +25,7 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           context: "{{defaultContext}}"
-          file: "docker/Dockerfile"
+          file: "server/docker/Dockerfile"
           push: true
           tags: ghcr.io/${{ github.repository }}:latest
   deploy:
