@@ -24,7 +24,7 @@ jobs:
 
       - name: Build
         run: |
-          cp .env.example .env
+          echo "VITE_SERVER_URL=https://rubicon-websockets.ajmuht.eu" >> .env
           npm install
           npm run client-build
 
