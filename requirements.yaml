@@ -1,0 +1,2 @@
+collections:
+  - name: git+https://github.com/medvesek/infrastructure.git#ansible/collections/medvesek/deploy

@@ -1,0 +1,48 @@
+name: DEploy server
+
+on:
+  workflow_dispatch:
+  repository_dispatch:
+    types: [deploy]
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+    steps:
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v6
+        with:
+          context: "{{defaultContext}}"
+          file: "docker/Dockerfile"
+          push: true
+          tags: ghcr.io/${{ github.repository }}:latest
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    container: ghcr.io/medvesek/infrastructure-ansible:latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_KEY_PRIVATE_GITHUB_ACTIONS }}
+
+      - name: Add to known hosts
+        run: ssh-keyscan ${{ secrets.AQUILA_IP }} >> /etc/ssh/ssh_known_hosts
+
+      - name: Install dependencies
+        run: ansible-galaxy install -r requirements.yaml
+
+      - name: Run playbook
+        run: ansible-playbook -u ansible -i ${{ secrets.AQUILA_IP }}, playbook.yml

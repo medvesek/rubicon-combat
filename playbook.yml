@@ -1,0 +1,14 @@
+- name: Deploy
+  hosts: all
+  tasks:
+    - name: Deploy
+      include_role:
+        name: medvesek.deploy.deploy
+      vars:
+        app_name: rubicon-combat
+        source: ./server/dist
+        expose:
+          - service: server
+            hostname: rubicon-websockets.ajmuht.eu
+            entrypoints: websecure
+            port: 80

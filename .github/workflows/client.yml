@@ -24,6 +24,7 @@ jobs:
 
       - name: Build
         run: |
+          cp .env.example .env
           npm install
           npm run client-build
 
