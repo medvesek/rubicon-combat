@@ -32,7 +32,6 @@ jobs:
   deploy:
     needs: build
     runs-on: ubuntu-latest
-    container: ghcr.io/medvesek/infrastructure-ansible:latest
     steps:
       - uses: actions/checkout@v4
 
