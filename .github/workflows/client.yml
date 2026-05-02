@@ -28,10 +28,11 @@ jobs:
           npm install
           npm run client-build
 
-      - name: Netlify
-        uses: medvesek/github-actions/actions/deploy-static@master
+      - name: Deploy
+        uses: medvesek/infrastructure/github-actions/lkwdeploy@master
         with:
-          netlify_token: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-          cloudflare_token: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          domain: rubicon.ajmuht.eu
-          dir: dist
+          cloudflare-token: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          server-ip: ${{ secrets.AQUILA_IP }}
+          ssh-user: ${{ secrets.SSH_USER }}
+          ssh-private-key: ${{ secrets.SSH_KEY_PRIVATE_GITHUB_ACTIONS }}
+          config: lkw-client.yaml
