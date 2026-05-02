@@ -1,4 +1,5 @@
 name: Deploy server
+run-name: Deploy server
 
 on:
   workflow_dispatch:
@@ -34,15 +35,12 @@ jobs:
     container: ghcr.io/medvesek/infrastructure-ansible:latest
     steps:
       - uses: actions/checkout@v4
-      - uses: webfactory/ssh-agent@v0.9.0
+
+      - name: Deploy
+        uses: medvesek/infrastructure/github-actions/lkwdeploy@master
         with:
+          cloudflare-token: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          server-ip: ${{ secrets.AQUILA_IP }}
+          ssh-user: ${{ secrets.SSH_USER }}
           ssh-private-key: ${{ secrets.SSH_KEY_PRIVATE_GITHUB_ACTIONS }}
-
-      - name: Add to known hosts
-        run: ssh-keyscan ${{ secrets.AQUILA_IP }} >> /etc/ssh/ssh_known_hosts
-
-      - name: Install dependencies
-        run: ansible-galaxy install -r requirements.yaml
-
-      - name: Run playbook
-        run: ansible-playbook -u ansible -i ${{ secrets.AQUILA_IP }}, playbook.yml
+          config: lkw-server.yaml

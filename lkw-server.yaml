@@ -1,0 +1,9 @@
+name: rubicon-websockets.ajmuht.eu
+type: app
+source: server/dist
+expose:
+  - service: app
+    expose:
+      - port: 80
+        entrypoint: websecure
+        domain: rubicon-websockets.ajmuht.eu

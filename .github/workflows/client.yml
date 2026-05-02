@@ -1,4 +1,5 @@
 name: Deploy client
+run-name: Deploy client
 
 on:
   workflow_dispatch:

@@ -1,5 +1,5 @@
 services:
-  server:
+  app:
     image: ghcr.io/medvesek/rubicon-combat:latest
     deploy:
       replicas: 1
